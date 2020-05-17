@@ -915,6 +915,7 @@ void Commands::setServoPos(double pos)
     VByteArray vb;
     vb.vbAppendInt8(COMM_SET_SERVO_POS);
     vb.vbAppendDouble16(pos, 1e3);
+    vb.vbAppendDouble16(pos, 1e3); // for debugging, move them together
     emitData(vb);
 }
 
