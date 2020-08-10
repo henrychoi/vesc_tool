@@ -198,7 +198,7 @@ void Commands::processPacket(QByteArray data)
 
         if (vb.size() >= 4) {
             if (mask & (uint32_t(1) << 16)) {
-                values.position = vb.vbPopFrontDouble32(1e6);
+                values.position = vb.vbPopFrontDouble32(1);
             }
         } else {
             values.position = -1.0;
@@ -241,7 +241,7 @@ void Commands::processPacket(QByteArray data)
         break;
 
     case COMM_ROTOR_POSITION:
-        emit rotorPosReceived(vb.vbPopFrontDouble32(1e5));
+        emit rotorPosReceived(vb.vbPopFrontDouble32(1));
         break;
 
     case COMM_EXPERIMENT_SAMPLE: {
@@ -725,7 +725,7 @@ void Commands::setPos(double pos)
 {
     VByteArray vb;
     vb.vbAppendInt8(COMM_SET_POS);
-    vb.vbAppendDouble32(pos, 1e6);
+    vb.vbAppendInt32(pos);
     emitData(vb);
 }
 
